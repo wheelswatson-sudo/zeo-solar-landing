@@ -9,9 +9,14 @@
   <meta property="og:description" content="$0 down. Battery backup included. See your savings in 10 seconds.">
   <meta property="og:type" content="website">
   <meta name="theme-color" content="#ffffff">
+  <meta property="og:url" content="https://wheelswatson-sudo.github.io/zeo-solar-landing/">
+  <meta property="og:image" content="https://zeoenergy.com/assets/zeo-energy-horizontal-RYuHUofB.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Lower Your FPL Bill by 30% | Zeo Energy">
+  <meta name="twitter:description" content="$0 down. See your savings in 10 seconds.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 24 24\'%3E%3Crect width=\'24\' height=\'24\' rx=\'5\' fill=\'%23FF6633\'/%3E%3Cpath d=\'M13 4L6 13h5l-1 7 7-9h-5l1-7z\' fill=\'white\'/%3E%3C/svg%3E">
 
-  <!-- Meta Pixel Code (REPLACE WITH YOUR PIXEL ID) -->
-  <!--
+  <!-- Meta Pixel - "Zeo Space Coast" - ID 1555440459062670 -->
   <script>
     !function(f,b,e,v,n,t,s)
     {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
@@ -21,10 +26,11 @@
     t.src=v;s=b.getElementsByTagName(e)[0];
     s.parentNode.insertBefore(t,s)}(window, document,'script',
     'https://connect.facebook.net/en_US/fbevents.js');
-    fbq('init', 'YOUR_PIXEL_ID_HERE');
+    fbq('init', '1555440459062670');
     fbq('track', 'PageView');
   </script>
-  -->
+  <noscript><img height="1" width="1" style="display:none"
+    src="https://www.facebook.com/tr?id=1555440459062670&ev=PageView&noscript=1"/></noscript>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -658,17 +664,64 @@
       margin: 0 auto;
       line-height: 1.6;
     }
+
+    /* --- tune-up additions --- */
+    .form-row { display:flex; gap:14px; }
+    .form-row .form-group { flex:1 1 0; min-width:0; }
+    .field-hint { font-size:11px; color:var(--gray-500,#6b7280); margin-top:5px; line-height:1.35; }
+    .results-context { font-size:13px; color:var(--gray-500,#6b7280); margin:10px 0 24px; line-height:1.5; }
+    .zip-note {
+      display:none; margin-top:10px; padding:10px 12px; border-radius:10px;
+      background:#fff7ed; border:1px solid #fed7aa; color:#9a3412;
+      font-size:12px; line-height:1.45;
+    }
+    .zip-note.show { display:block; }
+    @media (max-width:480px){ .form-row { gap:10px; } }
+
+    .logo-text { font-family:'Barlow',sans-serif; font-weight:800; font-size:18px; letter-spacing:-0.02em; color:var(--black); }
+    .logo-text b { color:var(--orange); font-weight:800; margin-left:3px; }
+
+    .hero-sub-line { color:var(--orange); display:inline-block; font-size:0.66em; letter-spacing:0; }
+
+    .rate-band {
+      display:flex; justify-content:center; gap:8px; flex-wrap:wrap;
+      max-width:640px; margin:0 auto 32px; padding:0 24px;
+    }
+    .rate-stat {
+      flex:1 1 150px; min-width:0; text-align:center;
+      background:var(--gray-50,#f9fafb); border:1px solid var(--border);
+      border-radius:12px; padding:14px 10px;
+    }
+    .rate-num { font-family:'Barlow',sans-serif; font-weight:800; font-size:20px; line-height:1.1; color:var(--black); }
+    .rate-num.rate-good { color:#16a34a; }
+    .rate-lbl { font-size:11px; color:var(--gray-500,#6b7280); margin-top:4px; line-height:1.3; }
+
+    .calc-error {
+      display:none; color:#dc2626; font-size:13px; font-weight:500;
+      margin:-4px 0 12px; text-align:left;
+    }
+    .calc-error.show { display:block; }
+
+    .results-section { scroll-margin-top: 100px; }
+    .hero { scroll-margin-top: 100px; }
+
+    @media (max-width:480px){
+      .rate-band { gap:6px; padding:0 16px; }
+      .rate-stat { flex:1 1 100px; padding:12px 6px; }
+      .rate-num { font-size:17px; }
+      .rate-lbl { font-size:10px; }
+    }
   </style>
 </head>
 <body>
 
   <!-- Header -->
   <header class="header">
-    <img src="https://zeoenergy.com/assets/zeo-energy-horizontal-RYuHUofB.png" alt="ZEO Energy" class="logo">
+    <img src="https://zeoenergy.com/assets/zeo-energy-horizontal-RYuHUofB.png" alt="ZEO Energy" class="logo" onerror="this.outerHTML='<span class=&quot;logo-text&quot;>ZEO<b>ENERGY</b></span>'">
     <div class="header-right">
-      <a href="tel:+17273759375" class="header-phone">
-        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
-        <span>(727) 375-9375</span>
+      <a href="sms:+18582094629" class="header-phone sms-link" onclick="trackLead('text_header')">
+        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+        <span>(858) 209-4629</span>
       </a>
       <a href="#calcCard" class="header-cta">Get a Quote</a>
     </div>
@@ -680,9 +733,25 @@
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
       Free Solar Estimate
     </div>
-    <h1>Lower Your FPL Bill by 30%</h1>
-    <p>$0 down. Battery backup included. See exactly what you'd save — takes 10 seconds.</p>
+    <h1>Lower Your FPL Bill by 30%<br><span class="hero-sub-line">Before Rates Climb Again</span></h1>
+    <p>FPL bills are up about 45% since 2020, and more increases are approved through 2029. Lock in a lower payment now. $0 down — takes 10 seconds.</p>
   </section>
+
+  <!-- FPL rate reality band -->
+  <div class="rate-band" id="rateBand">
+    <div class="rate-stat">
+      <div class="rate-num">+45%</div>
+      <div class="rate-lbl">FPL bills since 2020</div>
+    </div>
+    <div class="rate-stat">
+      <div class="rate-num">Thru 2029</div>
+      <div class="rate-lbl">More hikes approved</div>
+    </div>
+    <div class="rate-stat">
+      <div class="rate-num rate-good">2.9%/yr</div>
+      <div class="rate-lbl">Your solar rate, fixed</div>
+    </div>
+  </div>
 
   <!-- Calculator Card -->
   <div class="calc-card" id="calcCard">
@@ -693,12 +762,32 @@
     <p class="calc-subtitle">No contact info required — see your savings instantly</p>
 
     <div class="form-group">
-      <label for="billInput">Monthly FPL Bill <span>*</span></label>
+      <label for="billInput">Average Monthly FPL Bill <span>*</span></label>
       <div class="input-wrap">
         <span class="prefix">$</span>
-        <input type="number" id="billInput" class="form-input bill-input" placeholder="150" min="50" max="1000" step="1">
+        <input type="number" id="billInput" class="form-input bill-input" placeholder="150" min="40" max="2000" step="1" inputmode="numeric">
+      </div>
+      <p class="field-hint">Exact dollar amount from your utility bill</p>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group">
+        <label for="zipInput">ZIP Code</label>
+        <div class="input-wrap">
+          <input type="text" id="zipInput" class="form-input" placeholder="32901" maxlength="5" inputmode="numeric" autocomplete="postal-code">
+        </div>
+        <p class="field-hint">Optional &mdash; helps refine your estimate</p>
+      </div>
+      <div class="form-group">
+        <label for="sqftInput">Home Size (sq ft)</label>
+        <div class="input-wrap">
+          <input type="number" id="sqftInput" class="form-input" placeholder="1800" min="400" max="12000" step="50" inputmode="numeric">
+        </div>
+        <p class="field-hint">Optional &mdash; helps refine your estimate</p>
       </div>
     </div>
+
+    <p class="calc-error" id="calcError"></p>
 
     <button class="btn-calculate" id="calcBtn" onclick="calculateSavings()">
       Calculate My Savings
@@ -733,7 +822,8 @@
 
     <div class="results-header">
       <h2>Your Solar Savings Estimate</h2>
-      <p>Based on your $<span id="rBill">150</span>/mo FPL bill in Brevard County, FL</p>
+      <p>Based on your $<span id="rBill">150</span>/mo FPL bill in <span id="rPlace">Brevard County, FL</span></p>
+      <div class="zip-note" id="zipNote"></div>
     </div>
 
     <div class="savings-row">
@@ -790,6 +880,8 @@
       </div>
     </div>
 
+    <p class="results-context" id="roofNote" style="display:none;"></p>
+
     <div class="projection-card">
       <h3>25-Year Savings Projection</h3>
       <p class="proj-sub">Lease option &middot; assumes 4% avg. annual FPL rate increase</p>
@@ -823,11 +915,11 @@
     <div class="cta-card">
       <h2>Ready to Save <span id="rCtaSavings">$48</span>/mo?</h2>
       <p>Book a free consultation. We'll visit your home, confirm your numbers, and design your system. No obligation.</p>
-      <a href="https://calendar.app.google/HNuMhkgxjY2u1YbQ6" class="btn-book" id="bookBtn">
+      <a href="https://calendar.app.google/HNuMhkgxjY2u1YbQ6" class="btn-book" id="bookBtn" target="_blank" rel="noopener" onclick="trackLead('book_after_results')">
         Book My Free Consultation
         <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
       </a>
-      <p class="cta-phone">Or call <a href="tel:+17273759375">(727) 375-9375</a></p>
+      <p class="cta-phone">Or text <a href="sms:+18582094629" class="sms-link" onclick="trackLead('text_after_results')">(858) 209-4629</a></p>
     </div>
   </section>
 
@@ -871,11 +963,11 @@
   <section class="bottom-cta">
     <h2>Stop Overpaying FPL</h2>
     <p>Every month you wait is another month paying 30% more than you need to.</p>
-    <a href="https://calendar.app.google/HNuMhkgxjY2u1YbQ6" class="btn-book">
+    <a href="https://calendar.app.google/HNuMhkgxjY2u1YbQ6" class="btn-book" target="_blank" rel="noopener" onclick="trackLead('book_bottom')">
       Book My Free Consultation
       <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
     </a>
-    <p class="cta-phone" style="margin-top:12px;">Or call <a href="tel:+17273759375">(727) 375-9375</a></p>
+    <p class="cta-phone" style="margin-top:12px;">Or text <a href="sms:+18582094629" class="sms-link" onclick="trackLead('text_bottom')">(858) 209-4629</a></p>
   </section>
 
   <!-- Footer -->
@@ -897,14 +989,85 @@
       leaseTerm: 25,
     };
 
+    const AUSTIN_SMS = '+18582094629';
+
+    // Space Coast / Brevard service area. Used to name the city on the
+    // estimate and to catch people outside the territory early.
+    const ZIP_CITIES = {
+      '32754':'Mims','32780':'Titusville','32796':'Titusville',
+      '32922':'Cocoa','32923':'Cocoa','32924':'Cocoa','32926':'Cocoa','32927':'Cocoa',
+      '32920':'Cape Canaveral','32931':'Cocoa Beach',
+      '32952':'Merritt Island','32953':'Merritt Island',
+      '32955':'Rockledge','32940':'Viera','32934':'Melbourne',
+      '32901':'Melbourne','32903':'Indialantic','32904':'West Melbourne',
+      '32935':'Melbourne','32937':'Satellite Beach','32951':'Melbourne Beach',
+      '32905':'Palm Bay','32907':'Palm Bay','32908':'Palm Bay','32909':'Palm Bay',
+      '32949':'Grant-Valkaria','32950':'Malabar','32976':'Sebastian'
+    };
+    const SQFT_PER_PANEL = 21; // roughly, for a 410W module incl. spacing
+    let lastEstimate = null;
+    let lastChartData = null;
+
+    // Safe no-op until the Meta Pixel is switched on.
+    function track(event, params, custom) {
+      if (typeof fbq === 'undefined') return;
+      fbq(custom ? 'trackCustom' : 'track', event, params || {});
+    }
+
+    // Fires on the two things that are ACTUALLY leads: booking + texting.
+    function trackLead(source) {
+      track('Lead', {
+        content_name: 'Zeo Solar Landing',
+        content_category: source,
+        value: lastEstimate ? lastEstimate.monthlySavings : 0,
+        currency: 'USD'
+      });
+      if (source.indexOf('book') === 0) track('Schedule');
+    }
+
+    function smsHref() {
+      if (!lastEstimate) {
+        return 'sms:' + AUSTIN_SMS + '?&body=' +
+          encodeURIComponent('Hi Austin - I saw the Zeo solar page and would like a quote for my home.');
+      }
+      var e = lastEstimate;
+      var msg = 'Hi Austin - I used the Zeo savings calculator.';
+      msg += ' FPL bill: $' + e.bill + '/mo.';
+      msg += ' Estimate: $' + e.leasePayment + '/mo with solar, saving $' + e.monthlySavings + '/mo.';
+      msg += ' System: ' + e.kw + ' kW / ' + e.panels + ' panels.';
+      if (e.zip) msg += ' ZIP: ' + e.zip + (e.city ? ' (' + e.city + ')' : '') + '.';
+      if (e.sqft) msg += ' Home: ' + e.sqft + ' sq ft.';
+      msg += ' Can you send me the details?';
+      return 'sms:' + AUSTIN_SMS + '?&body=' + encodeURIComponent(msg);
+    }
+
+    function refreshSmsLinks() {
+      var href = smsHref();
+      document.querySelectorAll('.sms-link').forEach(function (a) { a.setAttribute('href', href); });
+    }
+
     function calculateSavings() {
       const billInput = document.getElementById('billInput');
+      const errEl = document.getElementById('calcError');
       const bill = parseFloat(billInput.value);
-      if (!bill || bill < 50) {
+
+      function showErr(msg) {
+        errEl.textContent = msg;
+        errEl.classList.add('show');
         billInput.style.borderColor = '#ef4444';
         billInput.focus();
-        return;
       }
+
+      if (!bill) { showErr('Enter your average monthly FPL bill to see your estimate.'); return; }
+      if (bill < 40) { showErr('That looks low for an FPL bill. Enter your average monthly amount — most Brevard homes run $130–$300.'); return; }
+      if (bill > 2000) { showErr('For bills over $2,000/mo, text Austin directly — you need a custom commercial design.'); return; }
+
+      const zipRaw = (document.getElementById('zipInput').value || '').trim();
+      const sqft = parseFloat(document.getElementById('sqftInput').value) || null;
+      const zip = /^\d{5}$/.test(zipRaw) ? zipRaw : null;
+      const city = zip ? (ZIP_CITIES[zip] || null) : null;
+
+      errEl.classList.remove('show');
       billInput.style.borderColor = '';
 
       const monthlyUsageKwh = bill / CONFIG.utilityRate;
@@ -944,8 +1107,9 @@
       }, 300);
 
       document.getElementById('calcCard').style.display = 'none';
-      document.getElementById('trustRow').style.display = 'none';
       document.getElementById('heroSection').style.display = 'none';
+      document.getElementById('rateBand').style.display = 'none';
+      // trustRow deliberately stays visible — proof belongs at the decision point
       document.getElementById('results').classList.add('active');
 
       setTimeout(() => {
@@ -954,12 +1118,51 @@
 
       drawChart(utilityData, solarData);
 
-      if (typeof fbq !== 'undefined') {
-        fbq('track', 'Lead', { content_name: 'Solar Quote Calculator', value: monthlySavings, currency: 'USD' });
+      // Where they are
+      const placeEl = document.getElementById('rPlace');
+      const zipNote = document.getElementById('zipNote');
+      zipNote.classList.remove('show');
+      if (city) {
+        placeEl.textContent = city + ', FL';
+      } else if (zip) {
+        placeEl.textContent = 'ZIP ' + zip;
+        zipNote.textContent = 'Heads up: ' + zip + ' is outside our Space Coast service area, so these numbers use Brevard County rates. Text Austin and he will tell you straight whether we cover you.';
+        zipNote.classList.add('show');
+      } else {
+        placeEl.textContent = 'Brevard County, FL';
       }
+
+      // Roof space the design would need
+      const roofNote = document.getElementById('roofNote');
+      const roofSqft = Math.round(panelCount * SQFT_PER_PANEL / 10) * 10;
+      if (sqft) {
+        roofNote.textContent = 'This design needs roughly ' + roofSqft.toLocaleString() +
+          ' sq ft of usable roof. On a ' + sqft.toLocaleString() +
+          ' sq ft home that is usually fine, but shading and roof shape decide it — Austin confirms on the visit.';
+        roofNote.style.display = '';
+      } else {
+        roofNote.textContent = 'This design needs roughly ' + roofSqft.toLocaleString() + ' sq ft of usable roof.';
+        roofNote.style.display = '';
+      }
+
+      lastEstimate = {
+        bill: bill, leasePayment: leasePayment, monthlySavings: monthlySavings,
+        zip: zip, city: city, sqft: sqft, panels: panelCount, kw: actualSystemKw.toFixed(1)
+      };
+      refreshSmsLinks();
+
+      // NOT a Lead — this is someone using a calculator. Optimising for this
+      // teaches Meta to find calculator-players instead of solar buyers.
+      track('ViewContent', {
+        content_name: 'Solar Savings Estimate',
+        value: monthlySavings,
+        currency: 'USD'
+      });
+      track('CalculatorComplete', { bill: bill, monthly_savings: monthlySavings }, true);
     }
 
     function drawChart(utilityData, solarData) {
+      lastChartData = [utilityData, solarData];
       const canvas = document.getElementById('projChart');
       const ctx = canvas.getContext('2d');
       const rect = canvas.parentElement.getBoundingClientRect();
@@ -986,10 +1189,12 @@
         const y = pad.top + (ch / 4) * i;
         ctx.fillText('$' + Math.round((maxVal - (maxVal / 4) * i) / 1000) + 'k', pad.left - 8, y + 4);
       }
-      ctx.textAlign = 'center';
       [0, 5, 10, 15, 20, 25].forEach(yr => {
-        ctx.fillText('Yr ' + yr, pad.left + (yr / (years - 1)) * cw, h - 6);
+        const lx = pad.left + (yr / 25) * cw;
+        ctx.textAlign = yr === 25 ? 'right' : (yr === 0 ? 'left' : 'center');
+        ctx.fillText('Yr ' + yr, Math.min(lx, w - pad.right), h - 6);
       });
+      ctx.textAlign = 'center';
 
       // Savings fill
       ctx.beginPath();
@@ -1042,16 +1247,29 @@
       document.getElementById('calcCard').style.display = '';
       document.getElementById('trustRow').style.display = '';
       document.getElementById('heroSection').style.display = '';
+      document.getElementById('rateBand').style.display = '';
       setTimeout(() => {
         document.getElementById('heroSection').scrollIntoView({ behavior: 'smooth' });
         document.getElementById('billInput').focus();
       }, 100);
     }
 
-    document.getElementById('billInput').addEventListener('keydown', function(e) {
-      if (e.key === 'Enter') { e.preventDefault(); calculateSavings(); }
+    ['billInput','zipInput','sqftInput'].forEach(function (id) {
+      document.getElementById(id).addEventListener('keydown', function (e) {
+        if (e.key === 'Enter') { e.preventDefault(); calculateSavings(); }
+      });
     });
     window.addEventListener('load', () => { setTimeout(() => document.getElementById('billInput').focus(), 500); });
+
+    // Redraw the chart when the phone rotates or the window resizes.
+    let resizeTimer;
+    window.addEventListener('resize', () => {
+      if (!lastChartData) return;
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(() => drawChart(lastChartData[0], lastChartData[1]), 180);
+    });
+
+    refreshSmsLinks();
   </script>
 </body>
 </html>
