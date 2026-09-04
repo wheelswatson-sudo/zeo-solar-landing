@@ -666,6 +666,48 @@
     }
 
     /* --- tune-up additions --- */
+    /* --- battery + faq --- */
+    .battery-section { background:var(--black,#0a0a0a); color:#fff; padding:56px 24px; margin-top:8px; }
+    .battery-inner { max-width:900px; margin:0 auto; text-align:center; }
+    .battery-badge {
+      display:inline-block; font-size:11px; font-weight:600; letter-spacing:0.06em;
+      text-transform:uppercase; color:var(--orange); border:1px solid rgba(255,102,51,0.45);
+      border-radius:100px; padding:5px 14px; margin-bottom:16px;
+    }
+    .battery-section h2 { font-family:'Barlow',sans-serif; font-size:30px; font-weight:800; line-height:1.15; margin-bottom:10px; color:#fff; }
+    .battery-lede { color:rgba(255,255,255,0.72); font-size:15px; margin-bottom:32px; }
+    .battery-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; text-align:left; }
+    .battery-card { background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.12); border-radius:14px; padding:20px; }
+    .battery-card h3 { font-family:'Barlow',sans-serif; font-size:16px; font-weight:700; margin-bottom:8px; color:var(--orange); }
+    .battery-card p { font-size:13.5px; line-height:1.55; color:rgba(255,255,255,0.78); }
+
+    .faq-section { max-width:720px; margin:0 auto; padding:56px 24px 8px; }
+    .faq-section h2 { font-family:'Barlow',sans-serif; font-size:28px; font-weight:800; text-align:center; margin-bottom:6px; }
+    .faq-sub { text-align:center; color:var(--gray-500,#6b7280); font-size:14px; margin-bottom:28px; }
+    .faq-item { border:1px solid var(--border); border-radius:12px; margin-bottom:10px; background:#fff; overflow:hidden; }
+    .faq-item summary {
+      cursor:pointer; list-style:none; padding:16px 46px 16px 18px; position:relative;
+      font-weight:600; font-size:15px; line-height:1.4;
+    }
+    .faq-item summary::-webkit-details-marker { display:none; }
+    .faq-item summary::after {
+      content:''; position:absolute; right:18px; top:22px; width:9px; height:9px;
+      border-right:2px solid var(--gray-500,#6b7280); border-bottom:2px solid var(--gray-500,#6b7280);
+      transform:rotate(45deg); transition:transform 0.2s ease;
+    }
+    .faq-item[open] summary::after { transform:rotate(-135deg); top:25px; }
+    .faq-item[open] summary { color:var(--orange); }
+    .faq-body { padding:0 18px 18px; }
+    .faq-body p { font-size:14px; line-height:1.65; color:var(--gray-600,#4b5563); }
+
+    @media (max-width:760px){
+      .battery-grid { grid-template-columns:1fr; }
+      .battery-section { padding:44px 20px; }
+      .battery-section h2 { font-size:25px; }
+      .faq-section { padding:44px 20px 4px; }
+      .faq-section h2 { font-size:24px; }
+    }
+
     .form-row { display:flex; gap:14px; }
     .form-row .form-group { flex:1 1 0; min-width:0; }
     .field-hint { font-size:11px; color:var(--gray-500,#6b7280); margin-top:5px; line-height:1.35; }
@@ -676,6 +718,7 @@
       font-size:12px; line-height:1.45;
     }
     .zip-note.show { display:block; }
+    .zip-note.ok { background:#f0f9ff; border-color:#bae6fd; color:#075985; }
     @media (max-width:480px){ .form-row { gap:10px; } }
 
     .logo-text { font-family:'Barlow',sans-serif; font-weight:800; font-size:18px; letter-spacing:-0.02em; color:var(--black); }
@@ -734,7 +777,7 @@
       Free Solar Estimate
     </div>
     <h1>Lower Your FPL Bill by 30%<br><span class="hero-sub-line">Before Rates Climb Again</span></h1>
-    <p>FPL bills are up about 45% since 2020, and more increases are approved through 2029. Lock in a lower payment now. $0 down — takes 10 seconds.</p>
+    <p>FPL bills are up about 45% since 2020, and more increases are approved through 2029. Lock in a lower payment now. $0 down. Takes 10 seconds.</p>
   </section>
 
   <!-- FPL rate reality band -->
@@ -759,7 +802,7 @@
       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
     </div>
     <h2>Get Your Free Estimate</h2>
-    <p class="calc-subtitle">No contact info required — see your savings instantly</p>
+    <p class="calc-subtitle">No contact info required. See your savings instantly</p>
 
     <div class="form-group">
       <label for="billInput">Average Monthly FPL Bill <span>*</span></label>
@@ -776,14 +819,14 @@
         <div class="input-wrap">
           <input type="text" id="zipInput" class="form-input" placeholder="32901" maxlength="5" inputmode="numeric" autocomplete="postal-code">
         </div>
-        <p class="field-hint">Optional &mdash; helps refine your estimate</p>
+        <p class="field-hint">Optional, helps refine your estimate</p>
       </div>
       <div class="form-group">
         <label for="sqftInput">Home Size (sq ft)</label>
         <div class="input-wrap">
           <input type="number" id="sqftInput" class="form-input" placeholder="1800" min="400" max="12000" step="50" inputmode="numeric">
         </div>
-        <p class="field-hint">Optional &mdash; helps refine your estimate</p>
+        <p class="field-hint">Optional, helps refine your estimate</p>
       </div>
     </div>
 
@@ -932,7 +975,7 @@
         <div class="step-dot">1</div>
         <div class="step-text">
           <h3>Book Your Free Consultation</h3>
-          <p>Pick a time that works. A Zeo Energy rep comes to your home — no cost, no obligation.</p>
+          <p>Pick a time that works. A Zeo Energy rep comes to your home. No cost, no obligation.</p>
         </div>
       </div>
       <div class="step">
@@ -946,17 +989,82 @@
         <div class="step-dot">3</div>
         <div class="step-text">
           <h3>We Handle Everything</h3>
-          <p>Permits, installation, inspections, FPL connection — our in-house crew does it all. Most systems installed in one day.</p>
+          <p>Permits, installation, inspections, FPL connection. Our in-house crew does it all. Most systems installed in one day.</p>
         </div>
       </div>
       <div class="step">
         <div class="step-dot">4</div>
         <div class="step-text">
           <h3>Start Saving Day One</h3>
-          <p>Your solar covers all your power. You pay Zeo instead of FPL — and your bill is 30% less from the start.</p>
+          <p>Your solar covers all your power. You pay Zeo instead of FPL, and your bill is 30% less from the start.</p>
         </div>
       </div>
     </div>
+  </section>
+
+
+  <!-- Battery backup -->
+  <section class="battery-section">
+    <div class="battery-inner">
+      <div class="battery-badge">Included, not an add-on</div>
+      <h2>When The Grid Goes Down, You Don't</h2>
+      <p class="battery-lede">Battery backup comes with every Zeo system. There is no extra line item for it.</p>
+      <div class="battery-grid">
+        <div class="battery-card">
+          <h3>Built for storm season</h3>
+          <p>Brevard loses power almost every hurricane season. Your battery takes over on its own. No cords to drag out, no generator, no 6am gas station run.</p>
+        </div>
+        <div class="battery-card">
+          <h3>Keeps the essentials alive</h3>
+          <p>Fridge, lights, Wi-Fi, fans and phone charging keep running while the rest of the street sits dark.</p>
+        </div>
+        <div class="battery-card">
+          <h3>Refills itself every day</h3>
+          <p>Your panels recharge the battery whenever the sun is out, so you are ready for the next outage instead of rationing fuel.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="faq-section">
+    <h2>Straight Answers</h2>
+    <p class="faq-sub">The questions people actually ask before they sign.</p>
+
+    <details class="faq-item">
+      <summary>What happens if I sell my house?</summary>
+      <div class="faq-body"><p>You have two paths. The buyer takes over the agreement, or you pay off the remaining balance at closing. Most Space Coast buyers are happy to inherit a power bill that is lower than FPL's. Ask Austin to walk you through both options before you sign anything.</p></div>
+    </details>
+
+    <details class="faq-item">
+      <summary>What if the panels don't make enough power?</summary>
+      <div class="faq-body"><p>You stay connected to FPL the entire time, so you never run out of power. Your system is designed around your real past usage, not a guess. If you use more than the system makes, you buy the difference from FPL at their normal rate. If you use less, the extra goes back to the grid.</p></div>
+    </details>
+
+    <details class="faq-item">
+      <summary>Does this put a lien on my home?</summary>
+      <div class="faq-body"><p>A solar lease is not a mortgage. The financing company files a UCC-1 notice that covers the solar equipment itself, not your house. It can show up in a title search when you sell, which is normal for any leased system, and it gets handled as part of the transfer. Ask Austin to show you the actual document before you sign.</p></div>
+    </details>
+
+    <details class="faq-item">
+      <summary>What does it cost up front?</summary>
+      <div class="faq-body"><p>Zero down. You pay a monthly amount for the power your system produces, and that amount is about 30% less than what FPL charges you today.</p></div>
+    </details>
+
+    <details class="faq-item">
+      <summary>Can I just pay cash instead?</summary>
+      <div class="faq-body"><p>You can, and for some people it still makes sense. One thing to know: the 30% federal tax credit for systems you own yourself ended on December 31, 2025. Leases and power purchase agreements still carry that credit through the end of 2027. That is why zero down is usually the better math right now, not just the easier one.</p></div>
+    </details>
+
+    <details class="faq-item">
+      <summary>Does my solar payment go up over time?</summary>
+      <div class="faq-body"><p>Yes, by 2.9% a year, and that number is written into your agreement so you can see it before you sign. FPL has averaged closer to 4% a year, with more increases already approved through 2029. The gap between those two numbers is where your savings come from, and it widens every year you stay.</p></div>
+    </details>
+
+    <details class="faq-item">
+      <summary>How long does the install take?</summary>
+      <div class="faq-body"><p>Most systems go in inside a single day. Zeo runs its own crews, so permits, installation, inspection and the FPL connection are all handled in house rather than farmed out to whoever is available.</p></div>
+    </details>
   </section>
 
   <!-- Bottom CTA -->
@@ -973,7 +1081,7 @@
   <!-- Footer -->
   <footer class="footer">
     <p>
-      Estimates are preliminary and based on a FL utility rate of $0.135/kWh rising 4% annually. Actual system size, pricing, and savings depend on roof, shading, utility rates, and usage. Lease includes 2.9% annual escalator over a 25-year term. The residential federal solar tax credit (Sec. 25D) ended December 31, 2025. All payment options subject to credit approval. ZEO Energy &copy; 2005&ndash;2026. Licensed &amp; insured.
+      Estimates are preliminary and based on a FL utility rate of $0.135/kWh rising 4% annually. Actual system size, pricing, and savings depend on roof, shading, utility rates, and usage. Lease includes 2.9% annual escalator over a 25-year term. The residential federal solar tax credit (Sec. 25D) ended December 31, 2025. All payment options subject to credit approval. ZEO Energy &copy; 2005 to 2026. Licensed &amp; insured.
     </p>
   </footer>
 
@@ -991,19 +1099,54 @@
 
     const AUSTIN_SMS = '+18582094629';
 
-    // Space Coast / Brevard service area. Used to name the city on the
-    // estimate and to catch people outside the territory early.
-    const ZIP_CITIES = {
-      '32754':'Mims','32780':'Titusville','32796':'Titusville',
-      '32922':'Cocoa','32923':'Cocoa','32924':'Cocoa','32926':'Cocoa','32927':'Cocoa',
-      '32920':'Cape Canaveral','32931':'Cocoa Beach',
-      '32952':'Merritt Island','32953':'Merritt Island',
-      '32955':'Rockledge','32940':'Viera','32934':'Melbourne',
-      '32901':'Melbourne','32903':'Indialantic','32904':'West Melbourne',
-      '32935':'Melbourne','32937':'Satellite Beach','32951':'Melbourne Beach',
-      '32905':'Palm Bay','32907':'Palm Bay','32908':'Palm Bay','32909':'Palm Bay',
-      '32949':'Grant-Valkaria','32950':'Malabar','32976':'Sebastian'
+    // Core Space Coast territory: within about an hour of Cocoa Beach, plus all of Brevard County.
+    const AREA_CORE = {
+      '32920':'Cape Canaveral', '32709':'Christmas', '32922':'Cocoa', '32923':'Cocoa',
+      '32924':'Cocoa', '32926':'Cocoa', '32927':'Cocoa', '32931':'Cocoa Beach',
+      '32932':'Cocoa Beach', '32949':'Grant', '32903':'Indialantic', '32950':'Malabar',
+      '32901':'Melbourne', '32902':'Melbourne', '32904':'Melbourne', '32912':'Melbourne',
+      '32919':'Melbourne', '32934':'Melbourne', '32935':'Melbourne', '32936':'Melbourne',
+      '32940':'Melbourne', '32941':'Melbourne', '32951':'Melbourne Beach', '32952':'Merritt Island',
+      '32953':'Merritt Island', '32954':'Merritt Island', '32754':'Mims', '32815':'Orlando',
+      '32833':'Orlando', '32855':'Orlando', '32899':'Orlando', '32905':'Palm Bay',
+      '32906':'Palm Bay', '32907':'Palm Bay', '32908':'Palm Bay', '32909':'Palm Bay',
+      '32910':'Palm Bay', '32911':'Palm Bay', '32925':'Patrick SFB', '32955':'Rockledge',
+      '32956':'Rockledge', '32937':'Satellite Beach', '32775':'Scottsmoor', '32976':'Sebastian',
+      '32959':'Sharpes', '32780':'Titusville', '32781':'Titusville', '32782':'Titusville',
+      '32783':'Titusville', '32796':'Titusville'
     };
+
+    // Still covered, just a longer drive for the crew. Never turn these people away.
+    const AREA_EXTENDED = {
+      '32701':'Altamonte Springs', '32714':'Altamonte Springs', '32715':'Altamonte Springs', '32716':'Altamonte Springs',
+      '32704':'Apopka', '32707':'Casselberry', '32718':'Casselberry', '32730':'Casselberry',
+      '32710':'Clarcona', '32132':'Edgewater', '32141':'Edgewater', '32948':'Fellsmere',
+      '34951':'Fort Pierce', '32732':'Geneva', '32733':'Goldenrod', '34741':'Kissimmee',
+      '34743':'Kissimmee', '34744':'Kissimmee', '32795':'Lake Mary', '32752':'Longwood',
+      '32791':'Longwood', '32751':'Maitland', '32794':'Maitland', '32799':'Mid Florida',
+      '32801':'Orlando', '32802':'Orlando', '32803':'Orlando', '32804':'Orlando',
+      '32805':'Orlando', '32806':'Orlando', '32807':'Orlando', '32808':'Orlando',
+      '32809':'Orlando', '32810':'Orlando', '32811':'Orlando', '32812':'Orlando',
+      '32814':'Orlando', '32816':'Orlando', '32817':'Orlando', '32819':'Orlando',
+      '32820':'Orlando', '32821':'Orlando', '32822':'Orlando', '32824':'Orlando',
+      '32825':'Orlando', '32826':'Orlando', '32827':'Orlando', '32828':'Orlando',
+      '32829':'Orlando', '32830':'Orlando', '32831':'Orlando', '32832':'Orlando',
+      '32834':'Orlando', '32835':'Orlando', '32837':'Orlando', '32839':'Orlando',
+      '32853':'Orlando', '32854':'Orlando', '32856':'Orlando', '32857':'Orlando',
+      '32858':'Orlando', '32859':'Orlando', '32860':'Orlando', '32861':'Orlando',
+      '32862':'Orlando', '32867':'Orlando', '32868':'Orlando', '32869':'Orlando',
+      '32872':'Orlando', '32877':'Orlando', '32878':'Orlando', '32886':'Orlando',
+      '32887':'Orlando', '32890':'Orlando', '32891':'Orlando', '32893':'Orlando',
+      '32897':'Orlando', '32898':'Orlando', '32762':'Oviedo', '32765':'Oviedo',
+      '32766':'Oviedo', '32957':'Roseland', '34771':'Saint Cloud', '34773':'Saint Cloud',
+      '32771':'Sanford', '32773':'Sanford', '32958':'Sebastian', '32978':'Sebastian',
+      '32777':'Tangerine', '32960':'Vero Beach', '32961':'Vero Beach', '32962':'Vero Beach',
+      '32963':'Vero Beach', '32964':'Vero Beach', '32965':'Vero Beach', '32966':'Vero Beach',
+      '32967':'Vero Beach', '32968':'Vero Beach', '32969':'Vero Beach', '32970':'Wabasso',
+      '32971':'Winter Beach', '34778':'Winter Garden', '32789':'Winter Park', '32790':'Winter Park',
+      '32792':'Winter Park', '32793':'Winter Park', '32708':'Winter Springs', '32719':'Winter Springs'
+    };
+
     const SQFT_PER_PANEL = 21; // roughly, for a 410W module incl. spacing
     let lastEstimate = null;
     let lastChartData = null;
@@ -1059,13 +1202,14 @@
       }
 
       if (!bill) { showErr('Enter your average monthly FPL bill to see your estimate.'); return; }
-      if (bill < 40) { showErr('That looks low for an FPL bill. Enter your average monthly amount — most Brevard homes run $130–$300.'); return; }
-      if (bill > 2000) { showErr('For bills over $2,000/mo, text Austin directly — you need a custom commercial design.'); return; }
+      if (bill < 40) { showErr('That looks low for an FPL bill. Enter your average monthly amount. Most Brevard homes run $130 to $300.'); return; }
+      if (bill > 2000) { showErr('For bills over $2,000/mo, text Austin directly. You need a custom commercial design.'); return; }
 
       const zipRaw = (document.getElementById('zipInput').value || '').trim();
       const sqft = parseFloat(document.getElementById('sqftInput').value) || null;
       const zip = /^\d{5}$/.test(zipRaw) ? zipRaw : null;
-      const city = zip ? (ZIP_CITIES[zip] || null) : null;
+      const city = zip ? (AREA_CORE[zip] || AREA_EXTENDED[zip] || null) : null;
+      const tier = !zip ? 0 : (AREA_CORE[zip] ? 1 : (AREA_EXTENDED[zip] ? 2 : 3));
 
       errEl.classList.remove('show');
       billInput.style.borderColor = '';
@@ -1109,7 +1253,7 @@
       document.getElementById('calcCard').style.display = 'none';
       document.getElementById('heroSection').style.display = 'none';
       document.getElementById('rateBand').style.display = 'none';
-      // trustRow deliberately stays visible — proof belongs at the decision point
+      // trustRow deliberately stays visible, proof belongs at the decision point
       document.getElementById('results').classList.add('active');
 
       setTimeout(() => {
@@ -1119,15 +1263,22 @@
       drawChart(utilityData, solarData);
 
       // Where they are
+      // Nobody gets turned away. Every ZIP gets the full estimate.
+      // Tier 1 = core Space Coast. Tier 2 = still covered, longer drive.
+      // Tier 3 = unrecognised ZIP, we still quote and let Austin confirm.
       const placeEl = document.getElementById('rPlace');
       const zipNote = document.getElementById('zipNote');
-      zipNote.classList.remove('show');
-      if (city) {
+      zipNote.classList.remove('show', 'ok');
+      if (tier === 1) {
         placeEl.textContent = city + ', FL';
-      } else if (zip) {
-        placeEl.textContent = 'ZIP ' + zip;
-        zipNote.textContent = 'Heads up: ' + zip + ' is outside our Space Coast service area, so these numbers use Brevard County rates. Text Austin and he will tell you straight whether we cover you.';
-        zipNote.classList.add('show');
+      } else if (tier === 2) {
+        placeEl.textContent = city + ', FL';
+        zipNote.textContent = 'We cover ' + city + '. It is a longer run for our crew than the immediate Space Coast, so Austin will lock in a time that works when he reaches out.';
+        zipNote.classList.add('show', 'ok');
+      } else if (tier === 3) {
+        placeEl.textContent = 'your area';
+        zipNote.textContent = 'Your estimate is ready below, based on Florida FPL rates. We have not mapped ZIP ' + zip + ' yet, so text Austin and he will confirm coverage in one message.';
+        zipNote.classList.add('show', 'ok');
       } else {
         placeEl.textContent = 'Brevard County, FL';
       }
@@ -1138,7 +1289,7 @@
       if (sqft) {
         roofNote.textContent = 'This design needs roughly ' + roofSqft.toLocaleString() +
           ' sq ft of usable roof. On a ' + sqft.toLocaleString() +
-          ' sq ft home that is usually fine, but shading and roof shape decide it — Austin confirms on the visit.';
+          ' sq ft home that is usually fine, but shading and roof shape decide it. Austin confirms on the visit.';
         roofNote.style.display = '';
       } else {
         roofNote.textContent = 'This design needs roughly ' + roofSqft.toLocaleString() + ' sq ft of usable roof.';
@@ -1151,7 +1302,7 @@
       };
       refreshSmsLinks();
 
-      // NOT a Lead — this is someone using a calculator. Optimising for this
+      // NOT a Lead. This is someone using a calculator. Optimising for this
       // teaches Meta to find calculator-players instead of solar buyers.
       track('ViewContent', {
         content_name: 'Solar Savings Estimate',
@@ -1270,6 +1421,13 @@
     });
 
     refreshSmsLinks();
+
+    // Which objections people actually open. Useful for ad copy later.
+    document.querySelectorAll('.faq-item').forEach(function (d) {
+      d.addEventListener('toggle', function () {
+        if (d.open) track('FaqOpen', { question: d.querySelector('summary').textContent.trim() }, true);
+      });
+    });
   </script>
 </body>
 </html>
