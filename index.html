@@ -9,7 +9,8 @@
   <meta property="og:description" content="$0 down. See your savings in 10 seconds.">
   <meta property="og:type" content="website">
   <meta name="theme-color" content="#ffffff">
-  <meta property="og:url" content="https://wheelswatson-sudo.github.io/zeo-solar-landing/">
+  <meta property="og:url" content="https://zeoenergyspacecoast.com/">
+  <link rel="canonical" href="https://zeoenergyspacecoast.com/">
   <meta property="og:image" content="https://zeoenergy.com/assets/zeo-energy-horizontal-RYuHUofB.png">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Lower Your FPL Bill by 30% | Zeo Energy">
@@ -46,7 +47,7 @@
       --gray-900: #1a1a1a;
       --gray-700: #404040;
       --gray-500: #717182;
-      --gray-400: #9ca3af;
+      --gray-400: #6b7280;
       --gray-300: #d1d5db;
       --gray-200: #e5e7eb;
       --gray-100: #f3f3f5;
@@ -714,6 +715,24 @@
     .form-row .form-group { flex:1 1 0; min-width:0; }
     .field-hint { font-size:11px; color:var(--gray-500,#6b7280); margin-top:5px; line-height:1.35; }
     .results-context { font-size:13px; color:var(--gray-500,#6b7280); margin:10px 0 24px; line-height:1.5; }
+
+    .rep {
+      display:flex; align-items:center; justify-content:center; gap:12px;
+      margin:0 0 18px;
+    }
+    .rep-photo {
+      width:52px; height:52px; border-radius:50%; flex-shrink:0;
+      object-fit:cover; object-position:center top; background:var(--gray-100);
+    }
+    .rep-initials {
+      width:52px; height:52px; border-radius:50%; flex-shrink:0; display:none;
+      align-items:center; justify-content:center; background:var(--gray-100);
+      color:var(--gray-500); font-family:'Barlow',sans-serif; font-weight:700; font-size:17px;
+    }
+    .rep-text { text-align:left; line-height:1.3; }
+    .rep-name { font-family:'Barlow',sans-serif; font-weight:700; font-size:15px; color:var(--black); }
+    .rep-role { font-size:12.5px; color:var(--gray-500,#6b7280); }
+
     .zip-note {
       display:none; margin-top:10px; padding:10px 12px; border-radius:10px;
       background:#fff7ed; border:1px solid #fed7aa; color:#9a3412;
@@ -824,15 +843,15 @@
         <p class="field-hint">Optional, helps refine your estimate</p>
       </div>
       <div class="form-group">
-        <label for="sqftInput">Home Size (sq ft)</label>
+        <label for="sqftInput">Home Size (sq ft) <span>*</span></label>
         <div class="input-wrap">
           <input type="number" id="sqftInput" class="form-input" placeholder="1800" min="400" max="12000" step="50" inputmode="numeric">
         </div>
-        <p class="field-hint">Optional, helps refine your estimate</p>
+        <p class="field-hint">We size the system from this</p>
       </div>
     </div>
 
-    <p class="calc-error" id="calcError"></p>
+    <p class="calc-error" id="calcError" role="alert" aria-live="assertive"></p>
 
     <button class="btn-calculate" id="calcBtn" onclick="calculateSavings()">
       Calculate My Savings
@@ -921,7 +940,6 @@
       </div>
     </div>
 
-    <p class="results-context" id="roofNote" style="display:none;"></p>
 
     <div class="projection-card">
       <h3>25-Year Savings Projection</h3>
@@ -941,7 +959,7 @@
         </div>
       </div>
       <div class="chart-wrap">
-        <canvas id="projChart"></canvas>
+        <canvas id="projChart" role="img" aria-label="Cost comparison over 25 years"></canvas>
       </div>
     </div>
 
@@ -954,6 +972,14 @@
 
     <!-- CTA after results -->
     <div class="cta-card">
+      <div class="rep">
+        <img src="austin.jpg" alt="Austin Taylor" class="rep-photo" width="52" height="52" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+        <div class="rep-initials" aria-hidden="true">AT</div>
+        <div class="rep-text">
+          <div class="rep-name">Austin Taylor</div>
+          <div class="rep-role">Your Zeo Energy rep, Space Coast</div>
+        </div>
+      </div>
       <h2>Ready to Save <span id="rCtaSavings">$48</span>/mo?</h2>
       <p>Book a free consultation. We'll visit your home, confirm your numbers, and design your system. No obligation.</p>
       <a href="https://calendar.app.google/HNuMhkgxjY2u1YbQ6" class="btn-book" id="bookBtn" target="_blank" rel="noopener" onclick="trackLead('book_after_results')">
@@ -966,6 +992,14 @@
 
   <!-- Bottom CTA -->
   <section class="bottom-cta">
+    <div class="rep">
+      <img src="austin.jpg" alt="Austin Taylor" class="rep-photo" width="52" height="52" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+      <div class="rep-initials" aria-hidden="true">AT</div>
+      <div class="rep-text">
+        <div class="rep-name">Austin Taylor</div>
+        <div class="rep-role">Your Zeo Energy rep, Space Coast</div>
+      </div>
+    </div>
     <h2>Stop Overpaying FPL</h2>
     <p>Every month you wait is another month paying 30% more than you need to.</p>
     <a href="https://calendar.app.google/HNuMhkgxjY2u1YbQ6" class="btn-book" target="_blank" rel="noopener" onclick="trackLead('book_bottom')">
@@ -1004,7 +1038,7 @@
       <div class="step">
         <div class="step-dot">4</div>
         <div class="step-text">
-          <h3>Start Saving Day One</h3>
+          <h3>Start Saving This Month</h3>
           <p>Your solar covers all your power. You pay Zeo instead of FPL, and your bill is 30% less from the start.</p>
         </div>
       </div>
@@ -1058,22 +1092,20 @@
   <!-- Footer -->
   <footer class="footer">
     <p>
-      Estimates are preliminary and based on a FL utility rate of $0.135/kWh rising 4% annually. Actual system size, pricing, and savings depend on roof, shading, utility rates, and usage. Lease includes 2.9% annual escalator over a 25-year term. All payment options subject to credit approval. ZEO Energy &copy; 2005 to 2026. Licensed &amp; insured.
+      Estimates are preliminary. System size is estimated from your home's square footage using typical Florida usage, and the 25-year figures assume your FPL bill rises 4% annually. Actual system size, pricing, and savings depend on roof, shading, utility rates, and usage. Lease includes 2.9% annual escalator over a 25-year term. All payment options subject to credit approval. ZEO Energy &copy; 2005 to 2026. Licensed &amp; insured.
     </p>
   </footer>
 
   <script>
     const CONFIG = {
       utilityRate: 0.135,
-      leaseRatePerKwh: 0.0918,
+      // The payment is simply 30% below the current bill. No per-kWh rate.
+      paymentShareOfBill: 0.70,
+      // Typical Florida home electricity use, per sq ft per year.
+      kwhPerSqftPerYear: 7.5,
       utilityEscalation: 0.04,
       leaseEscalation: 0.029,
       productionFactor: 1360,
-      // A power bill is not all kWh. Base charge, gross receipts tax and fees
-      // come off the top before we work out how much electricity was bought.
-      fixedMonthlyCharges: 25,
-      maxResidentialKw: 20,
-      panelWatts: 410,
       costPerWatt: 3.10,
       leaseTerm: 25,
     };
@@ -1128,7 +1160,6 @@
       '32792':'Winter Park', '32793':'Winter Park', '32708':'Winter Springs', '32719':'Winter Springs'
     };
 
-    const SQFT_PER_KW = 55; // roughly, array area per kW incl. spacing
     let lastEstimate = null;
     let lastChartData = null;
 
@@ -1187,7 +1218,19 @@
       if (bill > 2000) { showErr('For bills over $2,000/mo, text Austin directly. You need a custom commercial design.'); return; }
 
       const zipRaw = (document.getElementById('zipInput').value || '').trim();
-      const sqft = parseFloat(document.getElementById('sqftInput').value) || null;
+      const sqftInput = document.getElementById('sqftInput');
+      const sqft = parseFloat(sqftInput.value);
+
+      function showSqftErr(msg) {
+        errEl.textContent = msg;
+        errEl.classList.add('show');
+        sqftInput.style.borderColor = '#ef4444';
+        sqftInput.focus();
+      }
+      if (!sqft) { showSqftErr('Enter your home size in square feet. We size the system from it.'); return; }
+      if (sqft < 400) { showSqftErr('That looks small for a home. Enter the square footage from your listing or tax record.'); return; }
+      if (sqft > 12000) { showSqftErr('For homes over 12,000 sq ft, text Austin. That needs a custom design.'); return; }
+      sqftInput.style.borderColor = '';
       const zip = /^\d{5}$/.test(zipRaw) ? zipRaw : null;
       const city = zip ? (AREA_CORE[zip] || AREA_EXTENDED[zip] || null) : null;
       const tier = !zip ? 0 : (AREA_CORE[zip] ? 1 : (AREA_EXTENDED[zip] ? 2 : 3));
@@ -1195,19 +1238,17 @@
       errEl.classList.remove('show');
       billInput.style.borderColor = '';
 
-      const monthlyUsageKwh = bill / CONFIG.utilityRate;
+      // The system is sized from the home, not from the bill.
+      const annualUsageKwh = sqft * CONFIG.kwhPerSqftPerYear;
+      const actualSystemKw = Math.round((annualUsageKwh / CONFIG.productionFactor) * 10) / 10;
 
-      // Size the system off the electricity actually bought, not the whole bill.
-      const energyDollars = Math.max(bill - CONFIG.fixedMonthlyCharges, 0);
-      const usageForSizingKwh = energyDollars / CONFIG.utilityRate;
-      const rawSystemKw = (usageForSizingKwh * 12) / CONFIG.productionFactor;
-      const sizeCapped = rawSystemKw > CONFIG.maxResidentialKw;
-      const actualSystemKw = Math.round(Math.min(rawSystemKw, CONFIG.maxResidentialKw) * 10) / 10;
-
-      // Payment is unchanged: it tracks the bill, not the system size.
-      const leasePayment = Math.round(CONFIG.leaseRatePerKwh * monthlyUsageKwh);
-      const monthlySavings = bill - leasePayment;
-      const savingsPercent = Math.round((monthlySavings / bill) * 100);
+      // The payment is 30% below the bill, so what we promise is what we show.
+      // Cents are tidied up here rather than in the input, so the three numbers
+      // on screen always add up.
+      const shownBill = Math.round(bill);
+      const leasePayment = Math.round(bill * CONFIG.paymentShareOfBill);
+      const monthlySavings = shownBill - leasePayment;
+      const savingsPercent = Math.round((monthlySavings / shownBill) * 100);
 
       let totalUtility = 0, totalSolar = 0;
       const utilityData = [], solarData = [];
@@ -1218,11 +1259,11 @@
         solarData.push(Math.round(totalSolar));
       }
 
-      document.getElementById('rBill').textContent = bill;
+      document.getElementById('rBill').textContent = shownBill;
       document.getElementById('rPayment').textContent = leasePayment;
       document.getElementById('rSavings').textContent = monthlySavings;
       document.getElementById('rPercent').textContent = savingsPercent + '% less than FPL';
-      document.getElementById('rBarFPL').textContent = bill;
+      document.getElementById('rBarFPL').textContent = shownBill;
       document.getElementById('rBarZeo').textContent = leasePayment;
       document.getElementById('rSystemKw').textContent = actualSystemKw.toFixed(1);
       document.getElementById('rUtility25').textContent = '$' + Math.round(totalUtility).toLocaleString();
@@ -1232,7 +1273,7 @@
 
       setTimeout(() => {
         document.getElementById('barFPL').style.width = '100%';
-        document.getElementById('barZeo').style.width = ((leasePayment / bill) * 100) + '%';
+        document.getElementById('barZeo').style.width = ((leasePayment / shownBill) * 100) + '%';
       }, 300);
 
       document.getElementById('calcCard').style.display = 'none';
@@ -1275,29 +1316,6 @@
         placeEl.textContent = 'Brevard County, FL';
       }
 
-      // Roof space the design would need
-      const roofNote = document.getElementById('roofNote');
-      const roofSqft = Math.round(actualSystemKw * SQFT_PER_KW / 10) * 10;
-      let note = 'This design needs roughly ' + roofSqft.toLocaleString() + ' sq ft of usable roof.';
-      if (sqft && !sizeCapped) {
-        // Rule of thumb: usable array space is a fraction of the home footprint,
-        // so only call it comfortable when there is real room to spare.
-        const usableRoof = sqft * 0.45;
-        if (roofSqft <= usableRoof) {
-          note += ' On a ' + sqft.toLocaleString() + ' sq ft home there is usually room, ' +
-            'but shading and roof shape decide it. Austin confirms on the visit.';
-        } else {
-          note += ' That is a lot of roof for a ' + sqft.toLocaleString() + ' sq ft home, ' +
-            'so the design may come back smaller. Austin will measure the real roof on the visit.';
-        }
-      }
-      if (sizeCapped) {
-        note += ' Your usage is above a standard residential system, so this is capped at ' +
-          CONFIG.maxResidentialKw + ' kW. Austin will size the rest by hand.';
-      }
-      roofNote.textContent = note;
-      roofNote.style.display = '';
-
       lastEstimate = {
         bill: bill, leasePayment: leasePayment, monthlySavings: monthlySavings,
         zip: zip, city: city, sqft: sqft, kw: actualSystemKw.toFixed(1)
@@ -1316,6 +1334,13 @@
 
     function drawChart(utilityData, solarData) {
       lastChartData = [utilityData, solarData];
+      const chartEl = document.getElementById('projChart');
+      const endUtility = utilityData[utilityData.length - 1];
+      const endSolar = solarData[solarData.length - 1];
+      chartEl.setAttribute('aria-label',
+        'Running cost over 25 years. Staying with FPL totals about $' + endUtility.toLocaleString() +
+        '. Going solar totals about $' + endSolar.toLocaleString() +
+        ', a difference of about $' + (endUtility - endSolar).toLocaleString() + '.');
       const canvas = document.getElementById('projChart');
       const ctx = canvas.getContext('2d');
       const rect = canvas.parentElement.getBoundingClientRect();
@@ -1335,7 +1360,7 @@
         const y = pad.top + (ch / 4) * i;
         ctx.beginPath(); ctx.moveTo(pad.left, y); ctx.lineTo(w - pad.right, y); ctx.stroke();
       }
-      ctx.fillStyle = '#9ca3af';
+      ctx.fillStyle = '#6b7280';
       ctx.font = '11px Inter, sans-serif';
       ctx.textAlign = 'right';
       for (let i = 0; i <= 4; i++) {
@@ -1386,7 +1411,7 @@
       ctx.font = '11px Inter, sans-serif';
       ctx.fillStyle = '#d1d5db';
       ctx.fillRect(w - 160, 4, 10, 3);
-      ctx.fillStyle = '#9ca3af'; ctx.textAlign = 'left';
+      ctx.fillStyle = '#6b7280'; ctx.textAlign = 'left';
       ctx.fillText('Without Solar', w - 146, 10);
       ctx.fillStyle = '#FF6633';
       ctx.fillRect(w - 160, 18, 10, 3);
