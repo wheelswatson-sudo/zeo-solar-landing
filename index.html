@@ -426,7 +426,7 @@
     /* System specs */
     .specs-row {
       display: grid;
-      grid-template-columns: repeat(4, 1fr);
+      grid-template-columns: repeat(3, 1fr);
       gap: 12px;
       margin-bottom: 28px;
     }
@@ -793,8 +793,8 @@
       <div class="rate-lbl">More hikes approved</div>
     </div>
     <div class="rate-stat">
-      <div class="rate-num rate-good">2.9%/yr</div>
-      <div class="rate-lbl">Your solar rate, fixed</div>
+      <div class="rate-num rate-good">30% less</div>
+      <div class="rate-lbl">Your solar payment vs your FPL bill</div>
     </div>
   </div>
 
@@ -910,10 +910,6 @@
       <div class="spec-box">
         <div class="spec-val" id="rSystemKw">9.8</div>
         <div class="spec-label">kW System</div>
-      </div>
-      <div class="spec-box">
-        <div class="spec-val" id="rPanels">24</div>
-        <div class="spec-label">Panels</div>
       </div>
       <div class="spec-box">
         <div class="spec-val">$0</div>
@@ -1073,6 +1069,10 @@
       utilityEscalation: 0.04,
       leaseEscalation: 0.029,
       productionFactor: 1360,
+      // A power bill is not all kWh. Base charge, gross receipts tax and fees
+      // come off the top before we work out how much electricity was bought.
+      fixedMonthlyCharges: 25,
+      maxResidentialKw: 20,
       panelWatts: 410,
       costPerWatt: 3.10,
       leaseTerm: 25,
@@ -1128,7 +1128,7 @@
       '32792':'Winter Park', '32793':'Winter Park', '32708':'Winter Springs', '32719':'Winter Springs'
     };
 
-    const SQFT_PER_PANEL = 21; // roughly, for a 410W module incl. spacing
+    const SQFT_PER_KW = 55; // roughly, array area per kW incl. spacing
     let lastEstimate = null;
     let lastChartData = null;
 
@@ -1158,7 +1158,7 @@
       var msg = 'Hi Austin - I used the Zeo savings calculator.';
       msg += ' FPL bill: $' + e.bill + '/mo.';
       msg += ' Estimate: $' + e.leasePayment + '/mo with solar, saving $' + e.monthlySavings + '/mo.';
-      msg += ' System: ' + e.kw + ' kW / ' + e.panels + ' panels.';
+      msg += ' System: about ' + e.kw + ' kW.';
       if (e.zip) msg += ' ZIP: ' + e.zip + (e.city ? ' (' + e.city + ')' : '') + '.';
       if (e.sqft) msg += ' Home: ' + e.sqft + ' sq ft.';
       msg += ' Can you send me the details?';
@@ -1196,10 +1196,15 @@
       billInput.style.borderColor = '';
 
       const monthlyUsageKwh = bill / CONFIG.utilityRate;
-      const annualUsageKwh = monthlyUsageKwh * 12;
-      const systemSizeKw = annualUsageKwh / CONFIG.productionFactor;
-      const panelCount = Math.ceil((systemSizeKw * 1000) / CONFIG.panelWatts);
-      const actualSystemKw = (panelCount * CONFIG.panelWatts) / 1000;
+
+      // Size the system off the electricity actually bought, not the whole bill.
+      const energyDollars = Math.max(bill - CONFIG.fixedMonthlyCharges, 0);
+      const usageForSizingKwh = energyDollars / CONFIG.utilityRate;
+      const rawSystemKw = (usageForSizingKwh * 12) / CONFIG.productionFactor;
+      const sizeCapped = rawSystemKw > CONFIG.maxResidentialKw;
+      const actualSystemKw = Math.round(Math.min(rawSystemKw, CONFIG.maxResidentialKw) * 10) / 10;
+
+      // Payment is unchanged: it tracks the bill, not the system size.
       const leasePayment = Math.round(CONFIG.leaseRatePerKwh * monthlyUsageKwh);
       const monthlySavings = bill - leasePayment;
       const savingsPercent = Math.round((monthlySavings / bill) * 100);
@@ -1220,7 +1225,6 @@
       document.getElementById('rBarFPL').textContent = bill;
       document.getElementById('rBarZeo').textContent = leasePayment;
       document.getElementById('rSystemKw').textContent = actualSystemKw.toFixed(1);
-      document.getElementById('rPanels').textContent = panelCount;
       document.getElementById('rUtility25').textContent = '$' + Math.round(totalUtility).toLocaleString();
       document.getElementById('rSolar25').textContent = '$' + Math.round(totalSolar).toLocaleString();
       document.getElementById('rSaved25').textContent = '$' + Math.round(totalUtility - totalSolar).toLocaleString();
@@ -1273,20 +1277,30 @@
 
       // Roof space the design would need
       const roofNote = document.getElementById('roofNote');
-      const roofSqft = Math.round(panelCount * SQFT_PER_PANEL / 10) * 10;
-      if (sqft) {
-        roofNote.textContent = 'This design needs roughly ' + roofSqft.toLocaleString() +
-          ' sq ft of usable roof. On a ' + sqft.toLocaleString() +
-          ' sq ft home that is usually fine, but shading and roof shape decide it. Austin confirms on the visit.';
-        roofNote.style.display = '';
-      } else {
-        roofNote.textContent = 'This design needs roughly ' + roofSqft.toLocaleString() + ' sq ft of usable roof.';
-        roofNote.style.display = '';
+      const roofSqft = Math.round(actualSystemKw * SQFT_PER_KW / 10) * 10;
+      let note = 'This design needs roughly ' + roofSqft.toLocaleString() + ' sq ft of usable roof.';
+      if (sqft && !sizeCapped) {
+        // Rule of thumb: usable array space is a fraction of the home footprint,
+        // so only call it comfortable when there is real room to spare.
+        const usableRoof = sqft * 0.45;
+        if (roofSqft <= usableRoof) {
+          note += ' On a ' + sqft.toLocaleString() + ' sq ft home there is usually room, ' +
+            'but shading and roof shape decide it. Austin confirms on the visit.';
+        } else {
+          note += ' That is a lot of roof for a ' + sqft.toLocaleString() + ' sq ft home, ' +
+            'so the design may come back smaller. Austin will measure the real roof on the visit.';
+        }
       }
+      if (sizeCapped) {
+        note += ' Your usage is above a standard residential system, so this is capped at ' +
+          CONFIG.maxResidentialKw + ' kW. Austin will size the rest by hand.';
+      }
+      roofNote.textContent = note;
+      roofNote.style.display = '';
 
       lastEstimate = {
         bill: bill, leasePayment: leasePayment, monthlySavings: monthlySavings,
-        zip: zip, city: city, sqft: sqft, panels: panelCount, kw: actualSystemKw.toFixed(1)
+        zip: zip, city: city, sqft: sqft, kw: actualSystemKw.toFixed(1)
       };
       refreshSmsLinks();
 
