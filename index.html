@@ -1,4 +1,4 @@
-<!DOCTYPE html> 
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -950,6 +950,17 @@
     </div>
   </section>
 
+  <!-- Bottom CTA -->
+  <section class="bottom-cta">
+    <h2>Stop Overpaying FPL</h2>
+    <p>Every month you wait is another month paying 30% more than you need to.</p>
+    <a href="https://calendar.app.google/HNuMhkgxjY2u1YbQ6" class="btn-book" target="_blank" rel="noopener" onclick="trackLead('book_bottom')">
+      Book My Free Consultation
+      <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+    </a>
+    <p class="cta-phone" style="margin-top:12px;">Or text <a href="sms:+18582094629" class="sms-link" onclick="trackLead('text_bottom')">(858) 209-4629</a></p>
+  </section>
+
   <!-- Process -->
   <section class="process-section" id="process">
     <h2>What Happens Next</h2>
@@ -1029,16 +1040,6 @@
     </details>
   </section>
 
-  <!-- Bottom CTA -->
-  <section class="bottom-cta">
-    <h2>Stop Overpaying FPL</h2>
-    <p>Every month you wait is another month paying 30% more than you need to.</p>
-    <a href="https://calendar.app.google/HNuMhkgxjY2u1YbQ6" class="btn-book" target="_blank" rel="noopener" onclick="trackLead('book_bottom')">
-      Book My Free Consultation
-      <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-    </a>
-    <p class="cta-phone" style="margin-top:12px;">Or text <a href="sms:+18582094629" class="sms-link" onclick="trackLead('text_bottom')">(858) 209-4629</a></p>
-  </section>
 
   <!-- Footer -->
   <footer class="footer">
@@ -1218,6 +1219,11 @@
       // trustRow deliberately stays visible, proof belongs at the decision point
       document.getElementById('results').classList.add('active');
 
+      // Give the browser Back button something to return to
+      if (!(history.state && history.state.zeoView === 'results')) {
+        history.pushState({ zeoView: 'results' }, '', window.location.href);
+      }
+
       setTimeout(() => {
         document.getElementById('results').scrollIntoView({ behavior: 'smooth', block: 'start' });
       }, 100);
@@ -1353,7 +1359,12 @@
       ctx.fillText('With ZEO Solar', w - 146, 24);
     }
 
-    function resetCalculator() {
+    function resetCalculator(fromHistory) {
+      // Button click: step back in history instead, popstate runs this again
+      if (!fromHistory && history.state && history.state.zeoView === 'results') {
+        history.back();
+        return;
+      }
       document.getElementById('results').classList.remove('active');
       document.getElementById('barFPL').style.width = '0%';
       document.getElementById('barZeo').style.width = '0%';
@@ -1372,6 +1383,12 @@
         if (e.key === 'Enter') { e.preventDefault(); calculateSavings(); }
       });
     });
+    window.addEventListener('popstate', function () {
+      if (document.getElementById('results').classList.contains('active')) {
+        resetCalculator(true);
+      }
+    });
+
     window.addEventListener('load', () => { setTimeout(() => document.getElementById('billInput').focus(), 500); });
 
     // Redraw the chart when the phone rotates or the window resizes.
