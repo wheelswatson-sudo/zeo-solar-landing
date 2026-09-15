@@ -1163,10 +1163,76 @@
     let lastEstimate = null;
     let lastChartData = null;
 
+    // ---------- Where this visitor came from ----------
+    // Reads the ad tags off the URL, remembers them, and carries them into the
+    // two places a lead actually leaves the site: the text and the booking link.
+    const ATTR_KEYS = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term'];
+
+    function readAttribution() {
+      const q = new URLSearchParams(window.location.search);
+      const a = {};
+      ATTR_KEYS.forEach(function (k) {
+        const v = q.get(k);
+        if (v) a[k] = v.slice(0, 60);
+      });
+      ['fbclid', 'gclid', 'ttclid', 'msclkid'].forEach(function (k) {
+        const v = q.get(k);
+        if (v) a[k] = v.slice(0, 160);
+      });
+      // A Meta click always carries fbclid, even if someone forgot the UTMs.
+      if (!a.utm_source && a.fbclid) { a.utm_source = 'meta'; a.utm_medium = 'paid_social'; }
+      if (!a.utm_source && a.gclid) { a.utm_source = 'google'; a.utm_medium = 'cpc'; }
+      if (!a.utm_source && document.referrer) {
+        try {
+          const host = new URL(document.referrer).hostname.replace(/^www\./, '');
+          if (host && host.indexOf('zeoenergyspacecoast.com') === -1) a.referrer = host;
+        } catch (e) {}
+      }
+      a.landed = new Date().toISOString().slice(0, 10);
+      return a;
+    }
+
+    function attrSave(key, value) {
+      try { window.localStorage.setItem(key, JSON.stringify(value)); } catch (e) {}
+    }
+    function attrLoad(key) {
+      try { return JSON.parse(window.localStorage.getItem(key) || 'null'); } catch (e) { return null; }
+    }
+
+    const ATTR_NOW = readAttribution();
+    const ATTR_STORED_FIRST = attrLoad('zeo_attr_first');
+    const ATTR_FIRST = ATTR_STORED_FIRST || ATTR_NOW;
+    if (!ATTR_STORED_FIRST) attrSave('zeo_attr_first', ATTR_NOW);
+    attrSave('zeo_attr_last', ATTR_NOW);
+
+    // Short, readable tag. This is what Austin sees at the end of the text.
+    function sourceCode(a) {
+      const parts = [];
+      if (a.utm_source) parts.push(a.utm_source);
+      if (a.utm_campaign) parts.push(a.utm_campaign);
+      if (a.utm_content) parts.push(a.utm_content);
+      if (!parts.length && a.referrer) parts.push(a.referrer);
+      if (!parts.length) parts.push('direct');
+      return parts.join('/');
+    }
+    const SOURCE_CODE = sourceCode(ATTR_NOW);
+
+    // Attached to every pixel event so Meta can break results down by campaign
+    // and creative instead of lumping every visitor together.
+    function attrParams() {
+      return {
+        src: ATTR_NOW.utm_source || 'direct',
+        campaign: ATTR_NOW.utm_campaign || 'none',
+        creative: ATTR_NOW.utm_content || 'none',
+        first_src: ATTR_FIRST.utm_source || 'direct'
+      };
+    }
+
     // Safe no-op until the Meta Pixel is switched on.
     function track(event, params, custom) {
       if (typeof fbq === 'undefined') return;
-      fbq(custom ? 'trackCustom' : 'track', event, params || {});
+      const merged = Object.assign(attrParams(), params || {});
+      fbq(custom ? 'trackCustom' : 'track', event, merged);
     }
 
     // Fires on the two things that are ACTUALLY leads: booking + texting.
@@ -1183,7 +1249,8 @@
     function smsHref() {
       if (!lastEstimate) {
         return 'sms:' + AUSTIN_SMS + '?&body=' +
-          encodeURIComponent('Hi Austin - I saw the Zeo solar page and would like a quote for my home.');
+          encodeURIComponent('Hi Austin - I saw the Zeo solar page and would like a quote for my home.' +
+            ' [ref: ' + SOURCE_CODE + ']');
       }
       var e = lastEstimate;
       var msg = 'Hi Austin - I used the Zeo savings calculator.';
@@ -1193,6 +1260,7 @@
       if (e.zip) msg += ' ZIP: ' + e.zip + (e.city ? ' (' + e.city + ')' : '') + '.';
       if (e.sqft) msg += ' Home: ' + e.sqft + ' sq ft.';
       msg += ' Can you send me the details?';
+      msg += ' [ref: ' + SOURCE_CODE + ']';
       return 'sms:' + AUSTIN_SMS + '?&body=' + encodeURIComponent(msg);
     }
 
@@ -1460,6 +1528,52 @@
     });
 
     refreshSmsLinks();
+
+    // Carry the ad tags onto the booking link so the click is traceable.
+    document.querySelectorAll('a.btn-book').forEach(function (a) {
+      try {
+        const u = new URL(a.href);
+        ATTR_KEYS.forEach(function (k) { if (ATTR_NOW[k]) u.searchParams.set(k, ATTR_NOW[k]); });
+        u.searchParams.set('ref', SOURCE_CODE);
+        a.href = u.toString();
+      } catch (e) {}
+    });
+
+    // Did they start the calculator at all? Separates "saw the page" from
+    // "tried it and gave up", which are very different ad problems.
+    let calcStarted = false;
+    ['billInput', 'zipInput', 'sqftInput'].forEach(function (id) {
+      document.getElementById(id).addEventListener('input', function () {
+        if (calcStarted) return;
+        calcStarted = true;
+        track('CalculatorStart', {}, true);
+      });
+    });
+
+    // How far down the page people actually get.
+    const depthSeen = {};
+    window.addEventListener('scroll', function () {
+      const el = document.documentElement;
+      const total = el.scrollHeight - window.innerHeight;
+      if (total <= 0) return;
+      const pct = Math.round(((window.pageYOffset || el.scrollTop) / total) * 100);
+      [50, 90].forEach(function (mark) {
+        if (pct >= mark && !depthSeen[mark]) {
+          depthSeen[mark] = true;
+          track('ScrollDepth', { depth: mark }, true);
+        }
+      });
+    }, { passive: true });
+
+    // A minute on the page means a real visitor, not a misclick.
+    setTimeout(function () { track('Engaged60s', {}, true); }, 60000);
+
+    // Add ?debug=1 to the URL to check what the page captured.
+    if (new URLSearchParams(window.location.search).get('debug') === '1') {
+      console.log('[zeo] this visit:', ATTR_NOW);
+      console.log('[zeo] first ever visit:', ATTR_FIRST);
+      console.log('[zeo] ref code in the text to Austin:', SOURCE_CODE);
+    }
 
     // Which objections people actually open. Useful for ad copy later.
     document.querySelectorAll('.faq-item').forEach(function (d) {
